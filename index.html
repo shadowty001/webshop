@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VŌGE — Modern Fashion</title>
+    <link rel="stylesheet" href="styletwo.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- LOADER -->
+    <div id="loader">
+      <div class="loader-logo">VŌGE</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+
+    <!-- CURSOR -->
+    <div id="cursor"></div>
+    <div id="cursorDot"></div>
+
+    <!-- TOAST -->
+    <div id="toast"><span id="toastMsg"></span></div>
+
+    <!-- SEARCH OVERLAY -->
+    <div id="searchOverlay">
+      <button class="search-close" id="searchClose">✕</button>
+      <div class="search-inner">
+        <p class="search-label">What are you looking for?</p>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search styles, categories…"
+        />
+        <div id="searchResults"></div>
+      </div>
+    </div>
+
+    <!-- CART DRAWER -->
+    <div id="cartOverlay"></div>
+    <aside id="cartDrawer">
+      <div class="cart-head">
+        <h2>Cart <span id="cartCount">(0)</span></h2>
+        <button id="cartClose">✕</button>
+      </div>
+      <div id="cartBody"></div>
+      <div id="cartFoot"></div>
+    </aside>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <div class="nav-left">
+        <button class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <a class="nav-logo" data-page="home">VŌGE</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a data-page="home" class="nav-link active">Home</a></li>
+        <li><a data-page="shop" class="nav-link">Shop</a></li>
+        <li>
+          <a data-filter="women" data-page="shop" class="nav-link">Women</a>
+        </li>
+        <li><a data-filter="men" data-page="shop" class="nav-link">Men</a></li>
+        <li>
+          <a data-filter="accessories" data-page="shop" class="nav-link"
+            >Accessories</a
+          >
+        </li>
+        <li><a data-page="about" class="nav-link">About</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-icon" id="searchBtn" title="Search">
+          <svg
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </button>
+        <button class="nav-icon" id="wishlistNav" title="Wishlist">
+          <svg
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+            />
+          </svg>
+          <span class="badge" id="wishBadge" style="display: none">0</span>
+        </button>
+        <button class="nav-icon" id="cartBtn" title="Cart">
+          <svg
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 01-8 0" />
+          </svg>
+          <span class="badge" id="cartBadge" style="display: none">0</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu">
+      <ul>
+        <li><a data-page="home" class="mob-link">Home</a></li>
+        <li><a data-page="shop" class="mob-link">All Products</a></li>
+        <li>
+          <a data-filter="women" data-page="shop" class="mob-link">Women</a>
+        </li>
+        <li><a data-filter="men" data-page="shop" class="mob-link">Men</a></li>
+        <li>
+          <a data-filter="accessories" data-page="shop" class="mob-link"
+            >Accessories</a
+          >
+        </li>
+        <li>
+          <a data-filter="sale" data-page="shop" class="mob-link">Sale</a>
+        </li>
+        <li><a data-page="about" class="mob-link">About</a></li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════
+     PAGE: HOME
+═══════════════════════════════ -->
+    <main id="page-home" class="page active">
+      <!-- Hero -->
+      <section class="hero" id="hero">
+        <div class="hero-bg">
+          <img
+            id="heroBgImg"
+            src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&q=80"
+            alt=""
+          />
+          <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-text" id="heroText">
+            <span class="hero-tag">SS 2026 Collection</span>
+            <h1 class="hero-title">
+              Wear<br /><em>less.</em><br />Say<br /><em>more.</em>
+            </h1>
+            <p class="hero-sub">
+              Minimal forms. Thoughtful fabrics.<br />Designs that endure.
+            </p>
+            <div class="hero-actions">
+              <button class="btn-dark" data-page="shop">
+                Explore Collection
+              </button>
+              <button class="btn-ghost" data-filter="sale" data-page="shop">
+                View Sale
+              </button>
+            </div>
+          </div>
+          <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+          </div>
+        </div>
+        <!-- Slide indicators -->
+        <div class="hero-slides">
+          <div class="slide-dot active" data-slide="0"></div>
+          <div class="slide-dot" data-slide="1"></div>
+          <div class="slide-dot" data-slide="2"></div>
+        </div>
+      </section>
+
+      <!-- Ticker -->
+      <div class="ticker">
+        <div class="ticker-track" id="tickerTrack"></div>
+      </div>
+
+      <!-- New Arrivals -->
+      <section class="section" id="newArrivalsSection">
+        <div class="section-head">
+          <div>
+            <p class="section-eyebrow">Just Dropped</p>
+            <h2 class="section-title">New <em>Arrivals</em></h2>
+          </div>
+          <button class="btn-link" data-page="shop">
+            View All <span>→</span>
+          </button>
+        </div>
+        <div class="product-grid" id="featuredGrid"></div>
+      </section>
+
+      <!-- Category Banner -->
+      <section class="section no-top">
+        <div class="cat-banner" id="catBanner"></div>
+      </section>
+
+      <!-- Best Sellers -->
+      <section class="section bg-cream">
+        <div class="section-head">
+          <div>
+            <p class="section-eyebrow">Community Favourites</p>
+            <h2 class="section-title">Best <em>Sellers</em></h2>
+          </div>
+          <div class="rating-summary">
+            <span class="stars-sm">★★★★★</span>
+            <span class="rating-text">4.8 avg from 2,400+ reviews</span>
+          </div>
+        </div>
+        <div class="product-grid" id="bestGrid"></div>
+      </section>
+
+      <!-- Features -->
+      <div class="features-bar">
+        <div class="feat">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.3"
+            viewBox="0 0 24 24"
+          >
+            <rect x="1" y="3" width="15" height="13" rx="1" />
+            <path d="M16 8h4l3 5v3h-7V8z" />
+            <circle cx="5.5" cy="18.5" r="2.5" />
+            <circle cx="18.5" cy="18.5" r="2.5" />
+          </svg>
+          <div>
+            <strong>Free Shipping</strong>
+            <p>Orders over $150</p>
+          </div>
+        </div>
+        <div class="feat">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.3"
+            viewBox="0 0 24 24"
+          >
+            <polyline points="1 4 1 10 7 10" />
+            <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
+          </svg>
+          <div>
+            <strong>Free Returns</strong>
+            <p>30-day policy</p>
+          </div>
+        </div>
+        <div class="feat">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.3"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          <div>
+            <strong>Secure Checkout</strong>
+            <p>SSL encrypted</p>
+          </div>
+        </div>
+        <div class="feat">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.3"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+            />
+          </svg>
+          <div>
+            <strong>Live Support</strong>
+            <p>24/7 chat & email</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instagram-style lookbook -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="section-eyebrow">Editorial</p>
+            <h2 class="section-title">The <em>Lookbook</em></h2>
+          </div>
+        </div>
+        <div class="lookbook-grid" id="lookbookGrid"></div>
+      </section>
+
+      <!-- Newsletter -->
+      <section class="newsletter">
+        <div class="newsletter-inner">
+          <p class="section-eyebrow" style="color: var(--accent)">
+            Stay Informed
+          </p>
+          <h2>Get <em>Early Access</em></h2>
+          <p class="news-sub">
+            New drops, exclusive offers, and style guides — straight to your
+            inbox.
+          </p>
+          <form class="news-form" id="newsForm">
+            <input
+              type="email"
+              id="newsEmail"
+              placeholder="your@email.com"
+              required
+            />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer id="mainFooter"></footer>
+    </main>
+
+    <!-- ═══════════════════════════════
+     PAGE: SHOP
+═══════════════════════════════ -->
+    <main id="page-shop" class="page">
+      <div class="shop-hero">
+        <h1 id="shopHeading">All Products</h1>
+        <p id="shopSub"></p>
+      </div>
+      <div class="shop-toolbar">
+        <div class="filter-pills" id="filterPills"></div>
+        <div class="toolbar-right">
+          <span id="productCount" class="prod-count"></span>
+          <select id="sortSelect">
+            <option value="default">Featured</option>
+            <option value="price-asc">Price ↑</option>
+            <option value="price-desc">Price ↓</option>
+            <option value="name">A – Z</option>
+            <option value="rating">Top Rated</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridView" title="Grid">
+              ⊞
+            </button>
+            <button class="view-btn" id="listView" title="List">☰</button>
+          </div>
+        </div>
+      </div>
+      <div class="shop-body">
+        <aside class="shop-sidebar" id="shopSidebar">
+          <div class="sidebar-block">
+            <h4>Price Range</h4>
+            <div class="price-range">
+              <input
+                type="range"
+                id="priceSlider"
+                min="0"
+                max="500"
+                value="500"
+                step="10"
+              />
+              <div class="price-labels">
+                <span>$0</span><span id="priceMax">$500+</span>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-block">
+            <h4>Category</h4>
+            <div class="check-group" id="catChecks"></div>
+          </div>
+          <div class="sidebar-block">
+            <h4>Size</h4>
+            <div class="size-check-group" id="sizeChecks"></div>
+          </div>
+          <button class="reset-btn" id="resetFilters">Reset Filters</button>
+        </aside>
+        <div class="shop-main">
+          <div class="product-grid cols3" id="shopGrid"></div>
+          <div id="shopEmpty" style="display: none" class="empty-state">
+            <p>No products match your filters.</p>
+            <button class="btn-dark" id="clearShopFilters">
+              Clear Filters
+            </button>
+          </div>
+        </div>
+      </div>
+      <footer id="shopFooter"></footer>
+    </main>
+
+    <!-- ═══════════════════════════════
+     PAGE: PRODUCT DETAIL
+═══════════════════════════════ -->
+    <main id="page-product" class="page">
+      <div class="detail-wrap">
+        <div class="detail-gallery" id="detailGallery">
+          <div class="gallery-main">
+            <img id="mainImg" src="" alt="" />
+            <div class="gallery-zoom" id="galleryZoom"></div>
+          </div>
+          <div class="gallery-thumbs" id="galleryThumbs"></div>
+        </div>
+        <div class="detail-info" id="detailInfo"></div>
+      </div>
+      <section class="section bg-cream" id="relatedSection">
+        <div class="section-head">
+          <div>
+            <p class="section-eyebrow">You Might Also Like</p>
+            <h2 class="section-title">Related <em>Styles</em></h2>
+          </div>
+        </div>
+        <div class="product-grid cols3" id="relatedGrid"></div>
+      </section>
+      <footer id="prodFooter"></footer>
+    </main>
+
+    <!-- ═══════════════════════════════
+     PAGE: CHECKOUT
+═══════════════════════════════ -->
+    <main id="page-checkout" class="page">
+      <div class="checkout-wrap">
+        <div class="checkout-left">
+          <a
+            class="nav-logo"
+            data-page="home"
+            style="display: inline-block; margin-bottom: 40px"
+            >VŌGE</a
+          >
+          <div class="checkout-steps" id="checkoutSteps">
+            <div class="cstep active" data-step="0">Information</div>
+            <div class="cstep-arrow">›</div>
+            <div class="cstep" data-step="1">Shipping</div>
+            <div class="cstep-arrow">›</div>
+            <div class="cstep" data-step="2">Payment</div>
+          </div>
+          <div id="checkoutForms"></div>
+        </div>
+        <div class="checkout-right">
+          <h3 class="co-sum-title">Order Summary</h3>
+          <div id="coItems"></div>
+          <div class="co-totals" id="coTotals"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ═══════════════════════════════
+     PAGE: CONFIRMED
+═══════════════════════════════ -->
+    <main id="page-confirmed" class="page">
+      <div class="confirmed">
+        <div class="confirmed-check">✓</div>
+        <h1>Order Confirmed!</h1>
+        <p>
+          Thank you for shopping with VŌGE. A confirmation email is on its way.
+        </p>
+        <div class="confirmed-actions">
+          <button class="btn-dark" data-page="home">Back to Home</button>
+          <button class="btn-ghost-dark" data-page="shop">
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- ═══════════════════════════════
+     PAGE: ABOUT
+═══════════════════════════════ -->
+    <main id="page-about" class="page">
+      <div class="about-hero">
+        <img
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80"
+          alt=""
+        />
+        <div class="about-hero-overlay">
+          <h1>Our <em>Story</em></h1>
+        </div>
+      </div>
+      <div class="about-body">
+        <div class="about-intro reveal">
+          <h2>Fashion with a conscience.</h2>
+          <p>
+            Founded in 2020, VŌGE exists at the intersection of considered
+            design and sustainable craft. Every piece we create starts with a
+            single question: will this still matter in ten years? We work with
+            family-run factories across Portugal, Japan, and India — places
+            where skill is passed down through generations and where quality is
+            never compromised for speed.
+          </p>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat">
+            <strong>100%</strong><span>Organic & Recycled Fabrics</span>
+          </div>
+          <div class="stat">
+            <strong>12</strong><span>Partner Factories Worldwide</span>
+          </div>
+          <div class="stat">
+            <strong>50k+</strong><span>Happy Customers</span>
+          </div>
+          <div class="stat">
+            <strong>0</strong><span>Landfill Waste Policy</span>
+          </div>
+        </div>
+        <div class="about-values reveal">
+          <div class="val-card">
+            <span class="val-num">01</span>
+            <h3>Sustainable Materials</h3>
+            <p>
+              Certified organic linen, Tencel, recycled cotton and responsible
+              wool — every fabric is chosen for longevity and low impact.
+            </p>
+          </div>
+          <div class="val-card">
+            <span class="val-num">02</span>
+            <h3>Ethical Production</h3>
+            <p>
+              All factories are Fair Trade certified, independently audited, and
+              pay living wages. We visit every partner annually.
+            </p>
+          </div>
+          <div class="val-card">
+            <span class="val-num">03</span>
+            <h3>Timeless Design</h3>
+            <p>
+              We design for endurance, not trend cycles. Pieces built to be worn
+              for decades, not discarded after a season.
+            </p>
+          </div>
+        </div>
+      </div>
+      <footer id="aboutFooter"></footer>
+    </main>
+
+    <!-- ═══════════════════════════════
+     PAGE: WISHLIST
+═══════════════════════════════ -->
+    <main id="page-wishlist" class="page">
+      <div class="shop-hero">
+        <h1>My Wishlist</h1>
+        <p id="wishSubtitle"></p>
+      </div>
+      <div class="section">
+        <div class="product-grid cols3" id="wishGrid"></div>
+        <div id="wishEmpty" style="display: none" class="empty-state">
+          <p>Your wishlist is empty.</p>
+          <button class="btn-dark" data-page="shop">Start Shopping</button>
+        </div>
+      </div>
+      <footer id="wishFooter"></footer>
+    </main>
+
+    <script src="js.js"></script>
+  </body>
+</html>
